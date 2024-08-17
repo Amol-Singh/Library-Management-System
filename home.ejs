@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library Management</title>
+</head>
+<style>
+    .all{
+        text-align: center;
+    }   
+
+    .heading{
+        font-size: 40px;
+        animation: myanimation 20s linear infinite normal;
+    }
+
+    .btn1{
+        background-color: rgb(241, 243, 238);
+        font-size: 15px;
+        border-radius: 10px;
+        transition-duration: 0.25s;
+        width: 100px;
+        height: 40px;
+    }
+    .btn1:hover{
+        background-color: #7a969b ;
+        transition: font-size 0.25s linear infinite;
+        font-size: 20px;
+    }
+
+    @keyframes myanimation {
+        0%{
+            transform: translate(-400px,0);
+        }
+        50%{
+            transform: translate(400px,0);
+        }
+        100%{
+            transform: translate(-400px,0);
+        }
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        border: 2px solid black;
+    }
+    .addbook{
+        border: 2px solid black;
+        padding: 25px;
+        width: 200px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        height: 50px;
+        text-align: center;
+        border: 2px solid black;
+    }
+    tr:nth-child(1) {
+        background-color: #7a969b;
+    }
+    th,td:nth-child(odd){
+        border: 2px solid black;
+    }
+</style>
+
+<body>
+    <div class="all">
+        
+    <h1 class="heading" >Library Management System</h1>
+    <table>
+        <tr>
+            <th>Book Name</th>
+            <th>Book Author</th>
+            <th>Book Pages</th>
+            <th>Book Price</th>
+            <th>Book Availability</th>
+            <th>Issue</th>
+            <th>Return</th>
+            <th>Delete</th>
+        </tr>
+        <% data.forEach(element=> { %>
+            <tr>
+                <td>
+                    <%= element.bookName %>
+                </td>
+                <td>
+                    <%= element.bookAuthor %>
+                </td>
+                <td>
+                    <%= element.bookPages %>
+                </td>
+                <td>
+                    <%= element.bookPrice %>
+                </td>
+                <td>
+                    <%= element.bookState %>
+                </td>
+                <td>
+                    <form action="/issue" method="post">
+                        <input type="text" style="display: none;" 
+                               name="bookName" 
+                               value="<%= element.bookName %>">
+                        <button class="btn1" type="submit">Issue</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/return" method="post">
+                        <input type="text" style="display: none;" 
+                               name="bookName" 
+                               value="<%= element.bookName %>">
+                        <button class="btn1" type="submit">Return</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete" method="post">
+                        <input type="text" style="display: none;" 
+                               name="bookName" 
+                               value="<%= element.bookName %>">
+                        <button class="btn1" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+
+   <div class="addbook">
+        <h1 >Add Book</h1>
+
+        <form action="/" method="post">
+            <input type="text" placeholder="Book Name" 
+                name="bookName"><br></br>
+
+            <input type="text" placeholder="Book Author" 
+                name="bookAuthor"><br></br>
+
+            <input type="text" placeholder="Book Pages" 
+                name="bookPages"><br></br>
+
+            <input type="text" placeholder="Book Price" 
+                name="bookPrice"><br></br>
+                
+            <button class="btn1" type="submit">Add</button>
+        </form>
+   </div>
+
+    </div>  
+</body>
+
+</html>
